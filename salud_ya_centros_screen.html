@@ -1,0 +1,358 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.phone{width:340px;margin:1rem auto;background:#f5f6fa;border-radius:44px;border:8px solid #1a1a2e;overflow:hidden;position:relative;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:28px;background:#1a1a2e;border-radius:0 0 18px 18px;z-index:20;}
+.sbar{background:#fff;padding:13px 18px 4px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:#111;position:relative;z-index:10;}
+.sicons{display:flex;align-items:center;gap:5px;}
+.topbar{background:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid #eee;}
+.logo-row{display:flex;align-items:center;gap:6px;}
+.logo-txt{font-size:17px;font-weight:700;color:#1a2d5a;letter-spacing:-0.3px;}
+.logo-txt span{color:#00957a;}
+.ham{width:32px;height:32px;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:4px;cursor:pointer;border-radius:6px;border:none;background:none;}
+.ham span{display:block;height:2px;background:#333;border-radius:2px;}
+.ham span:last-child{width:70%;}
+.bell-wrap{position:relative;cursor:pointer;}
+.bell-badge{position:absolute;top:-4px;right:-4px;background:#00c851;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;}
+.body{background:#f5f6fa;padding:14px 14px 0;overflow:hidden;}
+.pg-title{font-size:21px;font-weight:800;color:#1a2d5a;}
+.pg-sub{font-size:12px;color:#888;margin-top:3px;margin-bottom:12px;}
+.search-row{display:flex;gap:8px;margin-bottom:12px;}
+.sbox{flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:24px;padding:9px 14px;display:flex;align-items:center;gap:8px;}
+.sbox input{border:none;outline:none;font-size:13px;color:#333;background:none;width:100%;}
+.sbox input::placeholder{color:#bbb;}
+.filter-btn{background:#fff;border:1px solid #e5e5e5;border-radius:24px;padding:9px 14px;display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12.5px;font-weight:600;color:#333;white-space:nowrap;}
+.filter-btn:hover{background:#f0f0f0;}
+.loc-banner{background:#fff;border:1px solid #e5e5e5;border-radius:14px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;}
+.loc-left{display:flex;align-items:center;gap:10px;}
+.loc-texts p:first-child{font-size:12.5px;font-weight:700;color:#1a2d5a;}
+.loc-texts p:last-child{font-size:11px;color:#888;margin-top:1px;}
+.usar-btn{display:flex;align-items:center;gap:5px;color:#2979ff;font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:none;}
+.usar-btn:hover{opacity:0.75;}
+.sec-lbl{font-size:14px;font-weight:700;color:#1a2d5a;margin-bottom:10px;}
+.cats-row{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px;scrollbar-width:none;}
+.cats-row::-webkit-scrollbar{display:none;}
+.cat-chip{flex-shrink:0;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;min-width:68px;transition:all 0.15s;}
+.cat-chip.active{background:#e8f0fe;border-color:#2979ff;}
+.cat-chip span{font-size:10.5px;font-weight:500;color:#555;text-align:center;line-height:1.2;}
+.cat-chip.active span{color:#2979ff;font-weight:700;}
+.cat-chip svg{opacity:0.6;}
+.cat-chip.active svg{opacity:1;}
+.centers-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+.ctr-card{background:#fff;border:0.5px solid #eee;border-radius:16px;overflow:hidden;display:flex;gap:0;transition:border-color 0.15s;cursor:pointer;}
+.ctr-card:hover{border-color:#b0c4f0;}
+.ctr-img{width:90px;flex-shrink:0;background:#d0e4f0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.ctr-img svg{opacity:0.35;}
+.ctr-body{flex:1;padding:10px 10px 10px 10px;min-width:0;}
+.ctr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:4px;}
+.ctr-name{font-size:12.5px;font-weight:700;color:#1a2d5a;line-height:1.3;flex:1;}
+.ctr-dist{font-size:12px;font-weight:700;color:#2979ff;white-space:nowrap;}
+.type-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin:4px 0 5px;}
+.ctr-row{display:flex;align-items:center;gap:4px;font-size:10.5px;color:#666;margin-bottom:2px;}
+.ctr-footer{display:flex;justify-content:space-between;align-items:center;margin-top:5px;}
+.ctr-rating{display:flex;align-items:center;gap:4px;font-size:11px;color:#555;}
+.dir-btn{background:#e8f0fe;color:#2979ff;border:none;border-radius:10px;padding:6px 10px;font-size:10.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:background 0.15s;}
+.dir-btn:hover{background:#c5d8fa;}
+.promo-card{background:#fff;border:1px solid #eee;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:70px;}
+.promo-txt{flex:1;}
+.promo-title{font-size:12.5px;font-weight:700;color:#2979ff;margin-bottom:3px;}
+.promo-sub{font-size:11px;color:#777;line-height:1.4;}
+.promo-btn{background:#2979ff;color:#fff;border:none;border-radius:10px;padding:9px 10px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:background 0.15s;}
+.promo-btn:hover{background:#1a5fd4;}
+.bottom-nav{background:#fff;border-top:0.5px solid #e5e5e5;display:flex;justify-content:space-around;align-items:center;padding:8px 0 12px;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 6px;border-radius:10px;min-width:50px;}
+.nav-lbl{font-size:10px;font-weight:500;color:#aaa;}
+.nav-item.active .nav-lbl{color:#2979ff;font-weight:700;}
+.nav-item.active i{color:#2979ff;}
+.nav-item i{color:#aaa;font-size:20px;}
+.toast{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);background:#1a2d5a;color:#fff;padding:7px 16px;border-radius:20px;font-size:11.5px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:100;}
+.toast.show{opacity:1;}
+.modal-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:50;align-items:flex-end;border-radius:36px;}
+.modal-overlay.active{display:flex;}
+.modal-sheet{background:#fff;border-radius:20px 20px 0 0;padding:20px 18px 28px;width:100%;}
+.modal-handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 14px;}
+.m-name{font-size:15px;font-weight:700;color:#1a2d5a;margin-bottom:2px;}
+.m-spec{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.m-row{display:flex;align-items:center;gap:6px;font-size:12px;color:#555;margin-bottom:5px;}
+.m-map{width:100%;height:90px;background:#e8f0fe;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:10px 0 12px;color:#2979ff;font-size:12px;font-weight:600;gap:6px;cursor:pointer;}
+.m-map:hover{background:#d0e2fc;}
+.m-close{text-align:center;margin-top:8px;font-size:12px;color:#2979ff;cursor:pointer;}
+.dir-full-btn{width:100%;background:#2979ff;color:#fff;border:none;border-radius:14px;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.15s;}
+.dir-full-btn:hover{background:#1a5fd4;}
+</style>
+
+<div style="display:flex;justify-content:center;padding:0.5rem 0 1rem;">
+<div class="phone" id="ph">
+  <div class="notch"></div>
+
+  <div class="sbar">
+    <span>9:41</span>
+    <div class="sicons">
+      <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#111"/><rect x="12" y="0" width="3" height="11" rx="1" fill="#111"/></svg>
+      <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2.5C9.8 2.5 11.8 3.5 13.2 5.1L14.5 3.8C12.7 1.8 10.2 0.5 7.5 0.5C4.8 0.5 2.3 1.8 0.5 3.8L1.8 5.1C3.2 3.5 5.2 2.5 7.5 2.5Z" fill="#111"/><path d="M7.5 5.5C9 5.5 10.3 6.1 11.3 7.1L12.6 5.8C11.2 4.4 9.4 3.5 7.5 3.5C5.6 3.5 3.8 4.4 2.4 5.8L3.7 7.1C4.7 6.1 6 5.5 7.5 5.5Z" fill="#111"/><circle cx="7.5" cy="10" r="1.5" fill="#111"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#111"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#111" fill-opacity="0.4"/></svg>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <div class="ham" onclick="showToast('Menú')"><span></span><span></span><span></span></div>
+    <div class="logo-row">
+      <svg width="26" height="26" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#00957a" opacity="0.12"/><path d="M19 6C15 6 11 9.5 11 14C11 20 19 30 19 30C19 30 27 20 27 14C27 9.5 23 6 19 6Z" fill="#00957a"/><circle cx="19" cy="10" r="3.5" fill="#1a5e8a" opacity="0.7"/><rect x="17" y="13" width="4" height="10" rx="2" fill="white"/><rect x="14" y="16" width="10" height="4" rx="2" fill="white"/></svg>
+      <span class="logo-txt">Salud <span>Ya</span></span>
+    </div>
+    <div class="bell-wrap" onclick="showToast('3 notificaciones nuevas')">
+      <i class="ti ti-bell" style="font-size:22px;color:#333;" aria-hidden="true"></i>
+      <div class="bell-badge">3</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="pg-title">Centros de salud</p>
+    <p class="pg-sub">Encuentra centros de salud cerca de ti</p>
+
+    <div class="search-row">
+      <div class="sbox">
+        <i class="ti ti-search" style="font-size:15px;color:#bbb;" aria-hidden="true"></i>
+        <input type="text" placeholder="Buscar centro de salud" id="searchInput" oninput="filterCenters()"/>
+      </div>
+      <button class="filter-btn" onclick="showToast('Filtros avanzados')">
+        <svg width="16" height="13" viewBox="0 0 18 14" fill="none"><path d="M1 1H17M4 7H14M7 13H11" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Filtros
+      </button>
+    </div>
+
+    <div class="loc-banner">
+      <div class="loc-left">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#2979ff" opacity="0.2" stroke="#2979ff" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" fill="#2979ff"/></svg>
+        <div class="loc-texts">
+          <p>Mi ubicación actual</p>
+          <p>Av. Siempre Viva 123, Ciudad</p>
+        </div>
+      </div>
+      <button class="usar-btn" onclick="showToast('Usando tu ubicación GPS...')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2979ff" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="#2979ff"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="#2979ff" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Usar mi ubicación
+      </button>
+    </div>
+
+    <p class="sec-lbl">Categorías</p>
+    <div class="cats-row" id="catsRow">
+      <div class="cat-chip active" onclick="filterCat('all',this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="#2979ff" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="1.5" stroke="#2979ff" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="1.5" stroke="#2979ff" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="1.5" stroke="#2979ff" stroke-width="1.8"/></svg>
+        <span>Todos</span>
+      </div>
+      <div class="cat-chip" onclick="filterCat('Hospital',this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="15" rx="1.5" stroke="#555" stroke-width="1.8"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" stroke="#555" stroke-width="1.8"/><path d="M12 10v5M9.5 12.5h5" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Hospitales</span>
+      </div>
+      <div class="cat-chip" onclick="filterCat('Centro de salud',this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="1.5" stroke="#555" stroke-width="1.8"/><path d="M12 9v6M9 12h6" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><path d="M8 5V3M16 5V3" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Centros de salud</span>
+      </div>
+      <div class="cat-chip" onclick="filterCat('Puesto de salud',this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 21V9l9-6 9 6v12H3z" stroke="#555" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 12v5M9.5 14.5h5" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Puestos de salud</span>
+      </div>
+      <div class="cat-chip" onclick="filterCat('Laboratorio',this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 3h6M10 3v8l-4 9h12l-4-9V3" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Laboratorios</span>
+      </div>
+    </div>
+
+    <p class="sec-lbl">Centros cercanos</p>
+    <div class="centers-list" id="centersList"></div>
+
+    <div class="promo-card">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <circle cx="22" cy="22" r="20" fill="#e8f0fe"/>
+        <path d="M22 10C16.48 10 12 14.48 12 20c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10z" fill="#2979ff" opacity="0.25"/>
+        <path d="M22 10C16.48 10 12 14.48 12 20c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10z" stroke="#2979ff" stroke-width="1.5"/>
+        <circle cx="22" cy="20" r="4" fill="#2979ff"/>
+      </svg>
+      <div class="promo-txt">
+        <p class="promo-title">¿No encuentras lo que buscas?</p>
+        <p class="promo-sub">Prueba ampliando tu búsqueda o cambiando los filtros.</p>
+      </div>
+      <button class="promo-btn" onclick="showToast('Abriendo mapa...')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4"/></svg>
+        Ver en mapa
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="window.location.href='saludya_v2_phone_mockup.html'">
+      <i class="ti ti-home"></i><span class="nav-lbl">Inicio</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='nueva_cita.html'">
+      <i class="ti ti-calendar"></i><span class="nav-lbl">Citas</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='salud_ya_medicos_screen.html'">
+      <i class="ti ti-stethoscope"></i><span class="nav-lbl">Médicos</span>
+    </div>
+    <div class="nav-item active">
+      <i class="ti ti-map-pin" style="color:#2979ff;"></i><span class="nav-lbl">Centros</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='salud_ya_perfil.html'">
+      <i class="ti ti-user"></i><span class="nav-lbl">Perfil</span>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-sheet" id="modalContent"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+</div>
+
+<script>
+const centers = [
+  {
+    name:'Centro de Salud San Martín',
+    type:'Centro de salud',
+    typeBg:'#e8f5e9',typeColor:'#2e7d32',
+    addr:'Av. San Martín 456, Ciudad',
+    hours:'Lun - Vie: 7:00 AM - 7:00 PM',
+    rating:'4.6',reviews:'128',
+    dist:'0.8 km',
+    imgBg:'#c8dce8',
+    imgIcon:`<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="36" height="30" rx="2" fill="#a0bccf"/><rect x="12" y="20" width="10" height="24" rx="1" fill="#7a9fb5"/><rect x="26" y="20" width="10" height="24" rx="1" fill="#7a9fb5"/><rect x="14" y="6" width="20" height="10" rx="1" fill="#b8d0de"/><rect x="20" y="8" width="8" height="4" rx="0.5" fill="#7a9fb5"/></svg>`
+  },
+  {
+    name:'Hospital General del Norte',
+    type:'Hospital',
+    typeBg:'#e3f2fd',typeColor:'#1565c0',
+    addr:'Calle Los Pinos 789, Ciudad',
+    hours:'Atención 24/7',
+    rating:'4.4',reviews:'256',
+    dist:'2.3 km',
+    imgBg:'#b8cfe0',
+    imgIcon:`<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="34" rx="2" fill="#90afc4"/><rect x="10" y="18" width="8" height="8" rx="1" fill="#c8dde9"/><rect x="20" y="18" width="8" height="8" rx="1" fill="#c8dde9"/><rect x="30" y="18" width="8" height="8" rx="1" fill="#c8dde9"/><rect x="16" y="30" width="16" height="14" rx="1" fill="#7a9fb5"/><rect x="21" y="4" width="6" height="8" rx="1" fill="#b8d0de"/><path d="M22 6h4M24 4v8" stroke="#7a9fb5" stroke-width="1.5" stroke-linecap="round"/></svg>`
+  },
+  {
+    name:'Puesto de Salud El Progreso',
+    type:'Puesto de salud',
+    typeBg:'#fce4ec',typeColor:'#880e4f',
+    addr:'Jr. El Progreso 321, Ciudad',
+    hours:'Lun - Vie: 8:00 AM - 4:00 PM',
+    rating:'4.2',reviews:'64',
+    dist:'3.1 km',
+    imgBg:'#a8c4d0',
+    imgIcon:`<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 22L24 6l18 16v22H6V22z" fill="#90b0c0"/><rect x="16" y="28" width="16" height="16" rx="1" fill="#7090a0"/><rect x="20" y="20" width="8" height="8" rx="1" fill="#c0d8e0"/><path d="M22 22h4M24 20v8" stroke="#90b0c0" stroke-width="1.5" stroke-linecap="round"/></svg>`
+  },
+  {
+    name:'Laboratorio Médico Central',
+    type:'Laboratorio',
+    typeBg:'#ede7f6',typeColor:'#4527a0',
+    addr:'Jr. Lima 100, Ciudad',
+    hours:'Lun - Sab: 7:00 AM - 5:00 PM',
+    rating:'4.5',reviews:'89',
+    dist:'1.5 km',
+    imgBg:'#c4c8e0',
+    imgIcon:`<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="10" y="6" width="28" height="36" rx="3" fill="#9090c0"/><rect x="14" y="14" width="8" height="10" rx="2" fill="#c8c8e8"/><rect x="26" y="14" width="8" height="10" rx="2" fill="#c8c8e8"/><rect x="14" y="28" width="20" height="4" rx="2" fill="#c8c8e8" opacity="0.5"/></svg>`
+  },
+];
+
+let activeFilter = 'all';
+let searchQ = '';
+
+function buildCard(c, idx){
+  return `<div class="ctr-card" onclick="openDetail(${idx})">
+    <div class="ctr-img" style="background:${c.imgBg};">${c.imgIcon}</div>
+    <div class="ctr-body">
+      <div class="ctr-top">
+        <p class="ctr-name">${c.name}</p>
+        <span class="ctr-dist">${c.dist}</span>
+      </div>
+      <span class="type-badge" style="background:${c.typeBg};color:${c.typeColor};">${c.type}</span>
+      <div class="ctr-row">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#888" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="#888" stroke-width="1.5"/></svg>
+        ${c.addr}
+      </div>
+      <div class="ctr-row">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#888" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg>
+        ${c.hours}
+      </div>
+      <div class="ctr-footer">
+        <div class="ctr-rating">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#f4b400"><path d="M6 1l1.4 2.9L11 4.4 8.5 6.8l.6 3.7L6 9l-3.1 1.5.6-3.7L1 4.4l3.6-.5L6 1z"/></svg>
+          ${c.rating} (${c.reviews} reseñas)
+        </div>
+        <button class="dir-btn" onclick="event.stopPropagation();showToast('Abriendo ruta a '+c.name)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l14 0M14 7l5 5-5 5" stroke="#2979ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Cómo llegar
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderCenters(){
+  const list = document.getElementById('centersList');
+  const q = searchQ.toLowerCase();
+  const filtered = centers.filter(c => {
+    const matchCat = activeFilter === 'all' || c.type === activeFilter;
+    const matchQ = !q || c.name.toLowerCase().includes(q) || c.type.toLowerCase().includes(q) || c.addr.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  if(!filtered.length){
+    list.innerHTML='<p style="text-align:center;color:#aaa;font-size:13px;padding:20px 0;">No se encontraron centros</p>';
+    return;
+  }
+  list.innerHTML = filtered.map((c)=> buildCard(c, centers.indexOf(c))).join('');
+}
+
+function filterCat(cat, el){
+  document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = cat;
+  renderCenters();
+}
+
+function filterCenters(){
+  searchQ = document.getElementById('searchInput').value;
+  renderCenters();
+}
+
+function openDetail(idx){
+  const c = centers[idx];
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <div class="modal-handle"></div>
+    <div style="width:100%;height:80px;background:${c.imgBg};border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">${c.imgIcon}</div>
+    <p class="m-name">${c.name}</p>
+    <span class="m-spec" style="background:${c.typeBg};color:${c.typeColor};">${c.type}</span>
+    <div class="m-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#888" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="#888" stroke-width="1.5"/></svg>${c.addr}</div>
+    <div class="m-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#888" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg>${c.hours}</div>
+    <div class="m-row">
+      <svg width="13" height="13" viewBox="0 0 12 12" fill="#f4b400"><path d="M6 1l1.4 2.9L11 4.4 8.5 6.8l.6 3.7L6 9l-3.1 1.5.6-3.7L1 4.4l3.6-.5L6 1z"/></svg>
+      ${c.rating} (${c.reviews} reseñas) · <span style="color:#2979ff;font-weight:600;">${c.dist}</span>
+    </div>
+    <div class="m-map" onclick="showToast('Abriendo Google Maps...')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4" stroke="#2979ff" stroke-width="1.8"/></svg>
+      Ver en el mapa
+    </div>
+    <button class="dir-full-btn" onclick="showToast('Calculando ruta...')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l14 0M14 7l5 5-5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Cómo llegar
+    </button>
+    <p class="m-close" onclick="document.getElementById('detailModal').classList.remove('active')">Cerrar</p>
+  `;
+  document.getElementById('detailModal').classList.add('active');
+}
+
+function setNav(el, label){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  if(label!=='Centros') showToast('Sección: '+label);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+renderCenters();
+</script>

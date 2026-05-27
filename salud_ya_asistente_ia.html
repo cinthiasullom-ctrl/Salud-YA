@@ -1,0 +1,304 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.phone{width:340px;margin:1rem auto;background:#f5f6fa;border-radius:44px;border:8px solid #1a1a2e;overflow:hidden;position:relative;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:28px;background:#1a1a2e;border-radius:0 0 18px 18px;z-index:20;}
+.sbar{background:#fff;padding:13px 18px 4px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:#111;z-index:10;}
+.sicons{display:flex;align-items:center;gap:5px;}
+.topbar{background:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid #eee;}
+.logo-row{display:flex;align-items:center;gap:6px;}
+.logo-txt{font-size:17px;font-weight:700;color:#1a2d5a;letter-spacing:-0.3px;}
+.logo-txt span{color:#00957a;}
+.back-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:none;color:#333;font-size:18px;}
+.bell-wrap{position:relative;cursor:pointer;}
+.bell-badge{position:absolute;top:-4px;right:-4px;background:#00c851;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;}
+.bot-header{background:#fff;padding:12px 14px;display:flex;align-items:center;gap:12px;border-bottom:0.5px solid #eee;}
+.bot-avatar{width:54px;height:54px;border-radius:50%;background:#e8f0fe;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid #c5d8fa;}
+.bot-info{flex:1;}
+.bot-name{font-size:15px;font-weight:800;color:#1a2d5a;}
+.bot-sub{font-size:11.5px;color:#888;margin:1px 0 4px;}
+.online-pill{display:inline-flex;align-items:center;gap:4px;background:#e8f5e9;border-radius:20px;padding:2px 8px;font-size:10.5px;font-weight:700;color:#2e7d32;}
+.online-dot{width:6px;height:6px;background:#43a047;border-radius:50%;}
+.disclaimer-box{background:#f5f6fa;border:1px solid #e5e5e5;border-radius:10px;padding:8px 10px;font-size:10.5px;color:#555;line-height:1.4;max-width:110px;display:flex;align-items:flex-start;gap:5px;}
+.chat-area{background:#f5f6fa;padding:12px 12px 0;display:flex;flex-direction:column;gap:10px;min-height:300px;}
+.msg-row{display:flex;gap:8px;align-items:flex-end;}
+.msg-row.user{flex-direction:row-reverse;}
+.bot-ico{width:30px;height:30px;border-radius:50%;background:#e8f0fe;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1.5px solid #c5d8fa;}
+.bubble{max-width:210px;padding:10px 12px;border-radius:16px;font-size:12.5px;line-height:1.5;position:relative;}
+.bubble.bot{background:#fff;border:0.5px solid #eee;border-bottom-left-radius:4px;color:#222;}
+.bubble.user{background:#dce8ff;border-bottom-right-radius:4px;color:#1a2d5a;}
+.bubble b{font-weight:700;}
+.bubble .time{font-size:10px;color:#aaa;margin-top:5px;display:flex;align-items:center;gap:3px;}
+.bubble.user .time{justify-content:flex-end;color:#7090b0;}
+.check-ico{font-size:10px;color:#2979ff;}
+.rec-list{margin:6px 0 4px;display:flex;flex-direction:column;gap:3px;}
+.rec-item{display:flex;align-items:flex-start;gap:6px;font-size:12px;color:#333;line-height:1.4;}
+.info-banner{background:#e8f6f0;border:1px solid #b2dfc9;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:11px;color:#2e5f4a;line-height:1.4;margin:0 12px;}
+.faq-section{padding:10px 12px 6px;}
+.faq-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.faq-title{font-size:13px;font-weight:700;color:#1a2d5a;}
+.ver-todas{font-size:11.5px;color:#2979ff;cursor:pointer;font-weight:500;}
+.faq-chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;}
+.faq-chips::-webkit-scrollbar{display:none;}
+.faq-chip{flex-shrink:0;background:#fff;border:1px solid #eee;border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;min-width:68px;transition:border-color 0.15s,background 0.15s;}
+.faq-chip:hover{border-color:#2979ff;background:#f0f5ff;}
+.faq-chip .chip-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.faq-chip span{font-size:10px;font-weight:600;color:#444;text-align:center;line-height:1.3;}
+.input-bar{background:#fff;padding:10px 12px 14px;display:flex;align-items:center;gap:8px;border-top:0.5px solid #eee;}
+.chat-input{flex:1;border:1px solid #e5e5e5;border-radius:24px;padding:9px 14px;font-size:13px;color:#333;outline:none;background:#f9f9f9;transition:border-color 0.15s;}
+.chat-input:focus{border-color:#2979ff;background:#fff;}
+.send-btn{width:40px;height:40px;border-radius:50%;background:#2979ff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background 0.15s,transform 0.1s;}
+.send-btn:hover{background:#1a5fd4;}
+.send-btn:active{transform:scale(0.95);}
+.bottom-nav{background:#fff;border-top:0.5px solid #e5e5e5;display:flex;justify-content:space-around;align-items:center;padding:8px 0 12px;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 6px;border-radius:10px;min-width:50px;}
+.nav-lbl{font-size:10px;font-weight:500;color:#aaa;}
+.nav-item.active .nav-lbl{color:#2979ff;font-weight:700;}
+.nav-item.active i{color:#2979ff;}
+.nav-item i{color:#aaa;font-size:20px;}
+.typing-bubble{display:none;align-items:flex-end;gap:8px;}
+.typing-bubble.show{display:flex;}
+.typing-dots{display:flex;gap:4px;padding:10px 14px;background:#fff;border-radius:16px;border-bottom-left-radius:4px;border:0.5px solid #eee;}
+.dot{width:7px;height:7px;background:#bbb;border-radius:50%;animation:bounce 1.2s infinite;}
+.dot:nth-child(2){animation-delay:0.2s;}
+.dot:nth-child(3){animation-delay:0.4s;}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-6px);}}
+.toast{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);background:#1a2d5a;color:#fff;padding:7px 16px;border-radius:20px;font-size:11.5px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:100;}
+.toast.show{opacity:1;}
+</style>
+
+<div style="display:flex;justify-content:center;padding:0.5rem 0 1rem;">
+<div class="phone" id="ph">
+  <div class="notch"></div>
+
+  <div class="sbar">
+    <span>9:41</span>
+    <div class="sicons">
+      <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#111"/><rect x="12" y="0" width="3" height="11" rx="1" fill="#111"/></svg>
+      <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2.5C9.8 2.5 11.8 3.5 13.2 5.1L14.5 3.8C12.7 1.8 10.2 0.5 7.5 0.5C4.8 0.5 2.3 1.8 0.5 3.8L1.8 5.1C3.2 3.5 5.2 2.5 7.5 2.5Z" fill="#111"/><path d="M7.5 5.5C9 5.5 10.3 6.1 11.3 7.1L12.6 5.8C11.2 4.4 9.4 3.5 7.5 3.5C5.6 3.5 3.8 4.4 2.4 5.8L3.7 7.1C4.7 6.1 6 5.5 7.5 5.5Z" fill="#111"/><circle cx="7.5" cy="10" r="1.5" fill="#111"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#111"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#111" fill-opacity="0.4"/></svg>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <button class="back-btn" onclick="window.location.href='saludya_v2_phone_mockup.html'" aria-label="Volver">←</button>
+    <div class="logo-row">
+      <svg width="26" height="26" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#00957a" opacity="0.12"/><path d="M19 6C15 6 11 9.5 11 14C11 20 19 30 19 30C19 30 27 20 27 14C27 9.5 23 6 19 6Z" fill="#00957a"/><circle cx="19" cy="10" r="3.5" fill="#1a5e8a" opacity="0.7"/><rect x="17" y="13" width="4" height="10" rx="2" fill="white"/><rect x="14" y="16" width="10" height="4" rx="2" fill="white"/></svg>
+      <span class="logo-txt">Salud <span>Ya</span></span>
+    </div>
+    <div class="bell-wrap" onclick="showToast('3 notificaciones')">
+      <i class="ti ti-bell" style="font-size:22px;color:#333;" aria-hidden="true"></i>
+      <div class="bell-badge">3</div>
+    </div>
+  </div>
+
+  <div class="bot-header">
+    <div class="bot-avatar">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="13" r="7" fill="#2979ff" opacity="0.15"/>
+        <rect x="11" y="9" width="14" height="12" rx="4" fill="#2979ff" opacity="0.9"/>
+        <circle cx="15" cy="13" r="2" fill="white"/>
+        <circle cx="21" cy="13" r="2" fill="white"/>
+        <circle cx="15" cy="13" r="1" fill="#2979ff"/>
+        <circle cx="21" cy="13" r="1" fill="#2979ff"/>
+        <rect x="16" y="21" width="4" height="5" rx="1" fill="#2979ff" opacity="0.7"/>
+        <rect x="9" y="22" width="18" height="8" rx="3" fill="#00957a" opacity="0.85"/>
+        <rect x="7" y="24" width="4" height="4" rx="2" fill="#2979ff" opacity="0.6"/>
+        <rect x="25" y="24" width="4" height="4" rx="2" fill="#2979ff" opacity="0.6"/>
+        <path d="M14 26h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 28h4" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <rect x="15" y="7" width="6" height="3" rx="1" fill="#2979ff" opacity="0.5"/>
+        <circle cx="18" cy="6" r="1.5" fill="#2979ff"/>
+      </svg>
+    </div>
+    <div class="bot-info">
+      <p class="bot-name">Asistente de IA</p>
+      <p class="bot-sub">Tu asistente de salud inteligente</p>
+      <div class="online-pill"><div class="online-dot"></div>En línea</div>
+    </div>
+    <div class="disclaimer-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#888" stroke-width="1.8"/><path d="M12 8v5M12 16v1" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>La IA no reemplaza la opinión de un especialista</span>
+    </div>
+  </div>
+
+  <div class="chat-area" id="chatArea">
+    <div class="msg-row">
+      <div class="bot-ico">
+        <svg width="18" height="18" viewBox="0 0 36 36" fill="none"><rect x="11" y="9" width="14" height="12" rx="4" fill="#2979ff" opacity="0.9"/><circle cx="15" cy="13" r="1.5" fill="white"/><circle cx="21" cy="13" r="1.5" fill="white"/><rect x="9" y="22" width="18" height="8" rx="3" fill="#00957a" opacity="0.85"/></svg>
+      </div>
+      <div class="bubble bot">
+        <b>¡Hola! Soy tu asistente de salud.</b><br>
+        Cuéntame, ¿cómo te sientes hoy? Puedo orientarte sobre síntomas comunes y recomendaciones generales.
+        <div class="time">09:41 AM</div>
+      </div>
+    </div>
+
+    <div class="msg-row user">
+      <div class="bubble user">
+        Desde ayer tengo dolor de cabeza, congestión nasal y un poco de fiebre.
+        <div class="time">09:43 AM <span class="check-ico">✓✓</span></div>
+      </div>
+    </div>
+
+    <div class="msg-row">
+      <div class="bot-ico">
+        <svg width="18" height="18" viewBox="0 0 36 36" fill="none"><rect x="11" y="9" width="14" height="12" rx="4" fill="#2979ff" opacity="0.9"/><circle cx="15" cy="13" r="1.5" fill="white"/><circle cx="21" cy="13" r="1.5" fill="white"/><rect x="9" y="22" width="18" height="8" rx="3" fill="#00957a" opacity="0.85"/></svg>
+      </div>
+      <div class="bubble bot">
+        <b>Gracias por la información.</b><br>
+        Por los síntomas que describes, podrías tener un resfriado común o una infección viral leve.<br><br>
+        Te recomiendo:
+        <div class="rec-list">
+          <div class="rec-item"><span>💧</span><span>Descansar e hidratarte</span></div>
+          <div class="rec-item"><span>💊</span><span>Puedes tomar paracetamol si tienes fiebre</span></div>
+          <div class="rec-item"><span>🧴</span><span>Usar solución salina para la congestión</span></div>
+        </div>
+        Si los síntomas empeoran o persisten por más de 3 días, consulta a un médico.
+        <div class="time">09:44 AM</div>
+      </div>
+    </div>
+
+    <div class="typing-bubble" id="typingBubble">
+      <div class="bot-ico">
+        <svg width="18" height="18" viewBox="0 0 36 36" fill="none"><rect x="11" y="9" width="14" height="12" rx="4" fill="#2979ff" opacity="0.9"/><circle cx="15" cy="13" r="1.5" fill="white"/><circle cx="21" cy="13" r="1.5" fill="white"/><rect x="9" y="22" width="18" height="8" rx="3" fill="#00957a" opacity="0.85"/></svg>
+      </div>
+      <div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+  </div>
+
+  <div class="info-banner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="#00957a" stroke-width="1.8"/><path d="M12 8v5M12 16v1" stroke="#00957a" stroke-width="2" stroke-linecap="round"/></svg>
+    <span>Esta información es orientativa y no sustituye la evaluación médica profesional.</span>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-hdr">
+      <span class="faq-title">Preguntas frecuentes</span>
+      <span class="ver-todas" onclick="showToast('Ver todas las preguntas')">Ver todas</span>
+    </div>
+    <div class="faq-chips">
+      <div class="faq-chip" onclick="sendFaq('Tengo dolor de cabeza, ¿qué puedo hacer?')">
+        <div class="chip-ico" style="background:#e8f5e9;">🧠</div>
+        <span>Dolor de cabeza</span>
+      </div>
+      <div class="faq-chip" onclick="sendFaq('Tengo dolor de estómago, ¿qué me recomiendas?')">
+        <div class="chip-ico" style="background:#ede7f6;">🫀</div>
+        <span>Dolor de estómago</span>
+      </div>
+      <div class="faq-chip" onclick="sendFaq('Tengo fiebre, ¿cuándo debo preocuparme?')">
+        <div class="chip-ico" style="background:#fff8e1;">🌡️</div>
+        <span>Fiebre</span>
+      </div>
+      <div class="faq-chip" onclick="sendFaq('Tengo problemas para dormir, ¿qué me recomiendas?')">
+        <div class="chip-ico" style="background:#e3f2fd;">💤</div>
+        <span>Problemas para dormir</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-bar">
+    <input class="chat-input" type="text" placeholder="Escribe tu mensaje..." id="chatInput" onkeydown="if(event.key==='Enter')sendMsg()"/>
+    <button class="send-btn" onclick="sendMsg()" aria-label="Enviar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="window.location.href='saludya_v2_phone_mockup.html'">
+      <i class="ti ti-home"></i><span class="nav-lbl">Inicio</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='nueva_cita.html'">
+      <i class="ti ti-calendar"></i><span class="nav-lbl">Citas</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='salud_ya_medicos_screen.html'">
+      <i class="ti ti-stethoscope"></i><span class="nav-lbl">Médicos</span>
+    </div>
+    <div class="nav-item active">
+      <i class="ti ti-robot" style="color:#2979ff;"></i><span class="nav-lbl">Asistente IA</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='salud_ya_perfil.html'">
+      <i class="ti ti-user"></i><span class="nav-lbl">Perfil</span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+</div>
+
+<script>
+const now = () => {
+  const d = new Date();
+  let h = d.getHours(), m = d.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} ${ampm}`;
+};
+
+const botIcon = `<div class="bot-ico"><svg width="18" height="18" viewBox="0 0 36 36" fill="none"><rect x="11" y="9" width="14" height="12" rx="4" fill="#2979ff" opacity="0.9"/><circle cx="15" cy="13" r="1.5" fill="white"/><circle cx="21" cy="13" r="1.5" fill="white"/><rect x="9" y="22" width="18" height="8" rx="3" fill="#00957a" opacity="0.85"/></svg></div>`;
+
+const responses = {
+  'dolor de cabeza': 'Para el <b>dolor de cabeza</b> te recomiendo:\n💧 Hidratarte bien con agua\n💊 Puedes tomar ibuprofeno o paracetamol\n😌 Descansar en un lugar tranquilo y oscuro\n🌬️ Ventilar el ambiente\n\nSi persiste más de 2 días o es muy intenso, consulta a un médico.',
+  'dolor de estómago': 'Para el <b>dolor de estómago</b> te sugiero:\n🍵 Tomar infusiones de manzanilla o menta\n🥗 Evitar alimentos grasos o irritantes\n💊 Pueden ayudar antiácidos si hay acidez\n🛌 Descansar y evitar esfuerzos\n\nSi hay sangre, vómitos o dolor muy intenso, acude urgencias.',
+  'fiebre': 'Sobre la <b>fiebre</b>:\n🌡️ Menor a 38°C: reposo e hidratación\n💊 Entre 38-39°C: paracetamol o ibuprofeno\n🚨 Mayor a 39°C o con convulsiones: acude a urgencias\n🧊 Compresas frías en frente y cuello ayudan\n\nMonitorea cada 4-6 horas.',
+  'dormir': 'Para los <b>problemas para dormir</b>:\n📵 Evita pantallas 1 hora antes de dormir\n☕ Sin cafeína después de las 4 PM\n🧘 Practica respiración profunda\n🌙 Mantén horarios regulares de sueño\n💊 Melatonina de venta libre puede ayudar\n\nSi persiste más de 3 semanas, consulta a un médico.',
+  'default': 'Entiendo tu consulta. Basándome en lo que me describes, te recomiendo:\n💧 Mantenerte hidratado/a\n😌 Descansar lo suficiente\n🩺 Si los síntomas persisten o empeoran, consulta con un especialista\n\n¿Puedes darme más detalles sobre tus síntomas para orientarte mejor?'
+};
+
+function getBotResponse(msg) {
+  const m = msg.toLowerCase();
+  if(m.includes('cabeza')) return responses['dolor de cabeza'];
+  if(m.includes('estómago') || m.includes('estomago') || m.includes('abdomen')) return responses['dolor de estómago'];
+  if(m.includes('fiebre') || m.includes('temperatura')) return responses['fiebre'];
+  if(m.includes('dormir') || m.includes('sueño') || m.includes('insomnio')) return responses['dormir'];
+  return responses['default'];
+}
+
+function appendMsg(html, isUser) {
+  const area = document.getElementById('chatArea');
+  const typing = document.getElementById('typingBubble');
+  const div = document.createElement('div');
+  div.className = 'msg-row' + (isUser ? ' user' : '');
+  div.innerHTML = html;
+  area.insertBefore(div, typing);
+  area.scrollTop = area.scrollHeight;
+}
+
+function showTyping(show) {
+  document.getElementById('typingBubble').classList.toggle('show', show);
+  document.getElementById('chatArea').scrollTop = 99999;
+}
+
+function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  const t = now();
+  appendMsg(`<div class="bubble user">${msg.replace(/</g,'&lt;')}<div class="time">${t} <span class="check-ico">✓✓</span></div></div>`, true);
+  showTyping(true);
+  setTimeout(() => {
+    showTyping(false);
+    const resp = getBotResponse(msg);
+    const formatted = resp.replace(/\n/g,'<br>').replace(/💧|💊|😌|🌬️|🍵|🥗|🛌|🌡️|🚨|🧊|📵|☕|🧘|🌙|💊|🩺|🩺|🫀|🧠|🌡️|💤/g, s=>`<span>${s}</span>`);
+    appendMsg(`${botIcon}<div class="bubble bot">${formatted}<div class="time">${now()}</div></div>`, false);
+  }, 1400);
+}
+
+function sendFaq(question) {
+  document.getElementById('chatInput').value = question;
+  sendMsg();
+}
+
+function setNav(el, label) {
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  if(label !== 'Asistente IA') showToast('Sección: '+label);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+</script>

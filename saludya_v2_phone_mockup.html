@@ -1,0 +1,492 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ph-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 20px;
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+  }
+
+  .ph-frame {
+    width: 340px;
+    background: var(--color-background-primary);
+    border: 6px solid #2C2C2A;
+    border-radius: 38px;
+    overflow: hidden;
+    font-family: var(--font-sans);
+  }
+
+  .ph-inner {
+    overflow-y: auto;
+    max-height: 680px;
+    padding-bottom: 64px;
+    scrollbar-width: none;
+  }
+
+  .ph-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ph-header {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-background-primary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .ph-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    color: #185FA5;
+  }
+
+  .ph-bell {
+    position: relative;
+    font-size: 17px;
+    color: var(--color-text-primary);
+  }
+
+  .ph-badge {
+    position: absolute;
+    top: -3px;
+    right: -4px;
+    background: #1D9E75;
+    color: white;
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 8px;
+    border: 2px solid var(--color-background-primary);
+  }
+
+  .ph-content {
+    padding: 14px 14px 0;
+  }
+
+  .ph-greeting {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .ph-sub {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .ph-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .ph-search-bar {
+    flex: 1;
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+  }
+
+  .ph-search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+    color: var(--color-text-primary);
+    width: 100%;
+  }
+
+  .ph-filter-btn {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 9px 11px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .ph-banner {
+    background: #185FA5;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ph-banner-text h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #E6F1FB;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+
+  .ph-banner-text p {
+    font-size: 11px;
+    color: #85B7EB;
+    margin-bottom: 10px;
+  }
+
+  .ph-cta {
+    background: white;
+    color: #185FA5;
+    border: none;
+    padding: 6px 13px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .ph-banner-icon {
+    width: 54px;
+    height: 62px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: rgba(255, 255, 255, 0.75);
+    flex-shrink: 0;
+  }
+
+  .ph-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .ph-sec-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .ph-sec-link {
+    font-size: 11px;
+    color: #185FA5;
+  }
+
+  .ph-quick {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .ph-qi {
+    text-align: center;
+    font-size: 10px;
+    color: var(--color-text-secondary);
+  }
+
+  .ph-qi-box {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+
+  .ph-appt {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+
+  .ph-doc-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .ph-doc-av {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #E6F1FB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #185FA5;
+    flex-shrink: 0;
+  }
+
+  .ph-doc-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .ph-doc-spec {
+    font-size: 11px;
+    color: #185FA5;
+    margin: 2px 0;
+  }
+
+  .ph-conf {
+    background: #EAF3DE;
+    color: #27500A;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .ph-appt-meta {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    display: flex;
+    gap: 14px;
+  }
+
+  .ph-appt-link {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    text-align: center;
+    font-size: 11px;
+    color: #1D9E75;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .ph-health {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .ph-hcard {
+    flex: 1;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 10px 8px;
+    border-left-width: 3px;
+    border-radius: 0;
+  }
+
+  .ph-hcard:first-child {
+    border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+  }
+
+  .ph-hcard:last-child {
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+  }
+
+  .ph-hcard i {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .ph-hcard .val {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .ph-hcard .lbl {
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+
+  .ph-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 16px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+    position: sticky;
+    bottom: 0;
+  }
+
+  .ph-ni {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .ph-ni.active {
+    color: #185FA5;
+  }
+
+  .ph-ni i {
+    font-size: 17px;
+  }
+</style>
+
+<div class="ph-wrap">
+  <div class="ph-frame">
+
+    <header class="ph-header">
+      <i class="fas fa-bars" style="font-size:16px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+      <div class="ph-logo">
+        <i class="fas fa-hand-holding-medical" aria-hidden="true"></i> Salud Ya
+      </div>
+      <div class="ph-bell">
+        <i class="far fa-bell" aria-hidden="true"></i>
+        <span class="ph-badge">3</span>
+      </div>
+    </header>
+
+    <div class="ph-inner">
+      <div class="ph-content">
+
+        <p class="ph-greeting">Hola, María 👋</p>
+        <p class="ph-sub">¿Cómo podemos ayudarte hoy?</p>
+
+        <div class="ph-search">
+          <div class="ph-search-bar">
+            <i class="fas fa-search" style="font-size:12px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+            <input type="text" placeholder="Buscar médicos, medicamentos...">
+          </div>
+          <div class="ph-filter-btn">
+            <i class="fas fa-sliders-h" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="ph-banner">
+          <div class="ph-banner-text">
+            <h3>Consulta con médicos desde donde estés</h3>
+            <p>Agenda tu cita de forma rápida y segura.</p>
+            <button class="ph-cta" onclick="window.location.href='nueva_cita.html'">Agendar cita ↗</button>
+          </div>
+          <div class="ph-banner-icon" aria-hidden="true">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+        </div>
+
+        <div class="ph-sec">
+          <span class="ph-sec-title">Accesos rápidos</span>
+          <span class="ph-sec-link">Ver todos</span>
+        </div>
+        <div class="ph-quick">
+          <div class="ph-qi" onclick="window.location.href='salud_ya_medicos_screen.html'" style="cursor:pointer">
+            <div class="ph-qi-box" style="color:#185FA5;transition:transform 0.15s" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''"><i class="fas fa-user-md" aria-hidden="true"></i></div>
+            Médicos
+          </div>
+          <div class="ph-qi" onclick="window.location.href='salud_ya_medicamentos_screen.html'" style="cursor:pointer">
+            <div class="ph-qi-box" style="color:#1D9E75;transition:transform 0.15s" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''"><i class="fas fa-pills" aria-hidden="true"></i></div>
+            Meds
+          </div>
+          <div class="ph-qi" onclick="window.location.href='salud_ya_centros_screen.html'" style="cursor:pointer">
+            <div class="ph-qi-box" style="color:#534AB7;transition:transform 0.15s" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''"><i class="fas fa-hospital" aria-hidden="true"></i></div>
+            Centros
+          </div>
+          <div class="ph-qi" onclick="window.location.href='salud_ya_asistente_ia.html'" style="cursor:pointer">
+            <div class="ph-qi-box" style="color:#E24B4A;transition:transform 0.15s" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''"><i class="fas fa-robot" aria-hidden="true"></i></div>
+            Asistente
+          </div>
+          <div class="ph-qi" onclick="window.location.href='salud_ya_historia_medica.html'" style="cursor:pointer">
+            <div class="ph-qi-box" style="color:#BA7517;transition:transform 0.15s" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''"><i class="fas fa-file-medical" aria-hidden="true"></i></div>
+            Historia
+          </div>
+        </div>
+
+        <div class="ph-sec">
+          <span class="ph-sec-title">Tu próxima cita</span>
+        </div>
+        <div class="ph-appt">
+          <div class="ph-doc-row">
+            <div class="ph-doc-av"><i class="fas fa-user-md" aria-hidden="true"></i></div>
+            <div style="flex:1;min-width:0">
+              <p class="ph-doc-name">Dr. Carlos Martínez</p>
+              <p class="ph-doc-spec">Medicina General</p>
+            </div>
+            <span class="ph-conf">Confirmada</span>
+          </div>
+          <div class="ph-appt-meta">
+            <span><i class="far fa-calendar" aria-hidden="true"></i> 15 de mayo de 2025</span>
+            <span><i class="far fa-clock" aria-hidden="true"></i> 10:30 AM</span>
+          </div>
+          <div class="ph-appt-link" onclick="window.location.href='nueva_cita.html'" style="cursor:pointer">
+            <i class="far fa-calendar-check" aria-hidden="true"></i> Ver detalles de la cita ↗
+          </div>
+        </div>
+
+        <div class="ph-sec">
+          <span class="ph-sec-title">Resumen de salud</span>
+          <span class="ph-sec-link">Ver más</span>
+        </div>
+        <div class="ph-health">
+          <div class="ph-hcard" style="border-left-color:#E24B4A">
+            <i class="fas fa-heartbeat" style="color:#E24B4A" aria-hidden="true"></i>
+            <div class="val">72 <small style="font-size:10px;font-weight:400">lpm</small></div>
+            <div class="lbl">Normal</div>
+          </div>
+          <div class="ph-hcard" style="border-left-color:#185FA5">
+            <i class="fas fa-weight" style="color:#185FA5" aria-hidden="true"></i>
+            <div class="val">68 <small style="font-size:10px;font-weight:400">kg</small></div>
+            <div class="lbl">Normal</div>
+          </div>
+          <div class="ph-hcard" style="border-left-color:#1D9E75">
+            <i class="fas fa-tint" style="color:#1D9E75" aria-hidden="true"></i>
+            <div class="val" style="font-size:13px">120/80</div>
+            <div class="lbl">mmHg</div>
+          </div>
+        </div>
+
+      </div>
+
+      <nav class="ph-nav" aria-label="Navegación principal">
+        <a class="ph-ni active" href="saludya_v2_phone_mockup.html"><i class="fas fa-home" aria-hidden="true"></i><span>Inicio</span></a>
+        <a class="ph-ni" href="nueva_cita.html"><i class="far fa-calendar" aria-hidden="true"></i><span>Citas</span></a>
+        <a class="ph-ni" href="salud_ya_medicos_screen.html"><i class="fas fa-user-md" aria-hidden="true"></i><span>Médicos</span></a>
+        <a class="ph-ni" href="salud_ya_medicamentos_screen.html"><i class="fas fa-pills" aria-hidden="true"></i><span>Meds</span></a>
+        <a class="ph-ni" href="salud_ya_perfil.html"><i class="far fa-user" aria-hidden="true"></i><span>Perfil</span></a>
+      </nav>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.ph-ni').forEach(item => {
+    item.addEventListener('click', function () {
+      document.querySelectorAll('.ph-ni').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
